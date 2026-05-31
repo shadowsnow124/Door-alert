@@ -14,11 +14,19 @@ Motion detector device for detecting suspicious movement at the door and send al
 - ```CLK -> D19```
 - ```DIO -> D18```
 
+| TM1637    | ESP32    |TYPE  | Description                |
+| :-------- | :------- | :--- | :------------------------- |
+| `GND`     | `GND`    | Power | Ground |
+| `VCC`     | `3v3`    | Power | Power  |
+
+
 2. Connect Ultrasonic Sensor to ESP32 <br>
 - ```VCC -> 3v3```
 - ```TRIG -> D14```
 - ```ECHO -> D12```
 - ```GND -> GND```
+
+
 
 3. Edit WiFi and Discord Configuration
 - Edit ssid
