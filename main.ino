@@ -4,15 +4,15 @@
 #include <HTTPClient.h>
 
 // --- Configuration ---
-const char* ssid = "donut9164_2.4G";
-const char* password = "24502450jkY";
-const char* discordWebhookUrl = "https://discord.com/api/webhooks/1440261151387553864/WkfgIzPky9wd6UyWkynsI5qxtb8k_rrZOJRx2V3rFUYmgW7T4IcASr-OdhLUT8LbOrNm";
+const char* ssid = "*your-ssid*";
+const char* password = "*your-pass*";
+const char* discordWebhookUrl = "https://discord.com/api/webhooks/*your-discord-webhook*";
 
-// TM1637 Display Pins
+// TM1637 Display
 #define CLK_PIN 19
 #define DIO_PIN 18
 
-// Ultrasonic Sensor Pins
+// Ultrasonic Sensor
 const int trigPin = 14;
 const int echoPin = 12;
 
@@ -66,23 +66,18 @@ void sendDiscordNotification(String message) {
   }
 }
 
-// --- Setup ---
 void setup() {
   Serial.begin(115200);
 
-  // Initialize Pins
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
   
-  // Display Setup
-  display.setBrightness(0x07); // Set brightness (0x00 to 0x0f, 0x07 is default)
+  display.setBrightness(0x07);
   display.clear();
 
-  // Network Setup
   connectToWiFi();
 }
 
-// --- Loop ---
 void loop() {
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
@@ -95,10 +90,10 @@ void loop() {
   if (duration > 0) {
     distance = (duration * 0.0343) / 2.0; 
   } else {
-    distance = 9999; // Set a large value if no echo received
+    distance = 9999;
   }
   
-  int displayDistance = min((int)distance, 9999); // Cap display at 9999
+  int displayDistance = min((int)distance, 9999);
   display.showNumberDec(displayDistance, false);
   Serial.print("Distance: ");
   Serial.println(distance);
@@ -110,5 +105,5 @@ void loop() {
 
   }
 
-  delay(1000); // Check and alert every 5 seconds to avoid spamming the webhook
+  delay(1000);
 }
